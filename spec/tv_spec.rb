@@ -10,8 +10,21 @@ describe GuideboxWrapper do
 			it "returns ended" do
 				expect(guidebox.status("entourage")).to eq("Ended")
 			end
-			it "returns 8 seasons" do
-				expect(guidebox.seasons("entourage").size).to eq(8)
+			describe "#seasons" do
+				it "returns 8 seasons" do
+					expect(guidebox.seasons("entourage").size).to eq(8)
+				end
+			end
+			describe "#cast" do
+				it "has value Jeremy Piven" do
+					expect_cast = guidebox.cast("entourage").find { |h| h["name"] == "Jeremy Piven" }
+					expect(expect_cast["name"]).to eq("Jeremy Piven")
+				end
+			end
+			describe "#first_aired" do
+				it "returns 2004-07-18" do
+					expect(guidebox.first_aired("entourage")).to eq("2004-07-18")
+				end
 			end
 		end
 	end
