@@ -22,7 +22,7 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+Will be updated as soon as Gem is completed and pushed up to RubyGem Repo
 
 ## Development
 
