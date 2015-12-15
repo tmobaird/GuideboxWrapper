@@ -16,6 +16,7 @@ module GuideboxWrapper
       results = data["results"]
     end
 
+    # Search for show by external db id
     def search_by_db_id(id, type)
       url = @base_url
       url += "/search/id/"
@@ -35,6 +36,7 @@ module GuideboxWrapper
       end
       @client.query(url)
     end
+
     # Get all tv show info
     def show_information(name)
       id = self.search_for(name).first["id"]
@@ -43,6 +45,7 @@ module GuideboxWrapper
       @client.query(url)
     end
 
+    # Get all seasons of show by name
     def seasons(name)
       id = self.search_for(name).first["id"]
       url = @base_url
@@ -51,118 +54,126 @@ module GuideboxWrapper
       data["results"]
     end
 
+    # Get the cast of show by show name
     def cast(name)
       url = search_and_set_url(name)
       results = @client.query(url)
       results["cast"]
     end
 
+    # Get the status of show by name ex. Ended
     def status(name)
       url = search_and_set_url(name)
       results = @client.query(url)
       results["status"]
     end
 
+    # Get type of show by name ex. TV
     def type(name)
       url = search_and_set_url(name)
       results = @client.query(url)
       results["type"]
     end
 
+    # Get show first aired date by name
     def first_aired(name)
       url = search_and_set_url(name)
       results = @client.query(url)
       results["first_aired"]
     end
 
+    # Get network aired on, ex HBO
     def network(name)
       url = search_and_set_url(name)
       results = @client.query(url)
       results["network"]
     end
 
+    # Get channel information of show by name
     def channel_information(name)
       url = search_and_set_url(name)
       results = @client.query(url)
       results["channels"]
     end
 
-    # def channel_images(name, guidebox)
-    #   id = guidebox.search_for(name).first["id"]
-    #   puts id
-    #   url = @base_url
-    #   url += "/show/" + id.to_s
-    #   puts url
-    #   results = @client.query(url)
-    #   results["channels"]
-    # end
-
+    # Get runtime of show by name
     def runtime(name)
       url = search_and_set_url(name)
       results = @client.query(url)
       results["runtime"]
     end
 
+    # Get genres of show by show name ex. Drama, Comedy
     def genres(name)
       url = search_and_set_url(name)
       results = @client.query(url)
       results["genres"]
     end
 
+    # Get tags of show by name
     def tags(name)
       url = search_and_set_url(name)
       results = @client.query(url)
       results["tags"]
     end
 
+    # Get overview or description of show by name
     def overview(name)
       url = search_and_set_url(name)
       results = @client.query(url)
       results["overview"]
     end
 
+    # Get air day of the week by show name
     def air_day_of_week(name)
       url = search_and_set_url(name)
       results = @client.query(url)
       results["air_day_of_week"]
     end
 
+    # Get air time of the day by show name
     def air_time(name)
       url = search_and_set_url(name)
       results = @client.query(url)
       results["air_time"]
     end
 
+    # Get show rating by name ex. TV-MA
     def rating(name)
       url = search_and_set_url(name)
       results = @client.query(url)
       results["rating"]
     end
 
+    # Get imdb id by show name
     def imdb_id(name)
       url = search_and_set_url(name)
       results = @client.query(url)
       results["imdb_id"]
     end
 
+    # Get metacritic link by show name
     def metacritic_link(name)
       url = search_and_set_url(name)
       results = @client.query(url)
       results["metacritic"]
     end
 
+    # Get wikipedia id by show name
     def wikipedia_id(name)
       url = search_and_set_url(name)
       results = @client.query(url)
       results["wikipedia_id"]
     end
 
+    # Get facebook_link by show name
     def facebook_link(name)
       url = search_and_set_url(name)
       results = @client.query(url)
       results["social"]["facebook"]["link"]
     end
 
+    # Get twitter_link by name
     def twitter_link(name)
       url = search_and_set_url(name)
       results = @client.query(url)
@@ -185,6 +196,7 @@ module GuideboxWrapper
       @client.query(url)
     end
 
+    # Gets all show thumbnail images by name or id
     def thumbnail_images(name_or_id)
       url = @base_url
       id = set_name_or_id(name_or_id)
@@ -192,6 +204,7 @@ module GuideboxWrapper
       @client.query(url)
     end
 
+    # Gets all show banner images by name or id
     def banner_images(name_or_id)
       url = @base_url
       id = set_name_or_id(name_or_id)
@@ -199,6 +212,7 @@ module GuideboxWrapper
       @client.query(url)
     end
 
+    # Gets all show background images by name or id
     def background_images(name_or_id)
       url = @base_url
       id = set_name_or_id(name_or_id)
@@ -235,6 +249,5 @@ module GuideboxWrapper
       end
       id
     end
-
   end
 end
