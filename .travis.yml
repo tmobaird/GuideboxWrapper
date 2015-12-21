@@ -4,9 +4,9 @@ cache: bundler
 rvm:
   - 2.2.1
 
-script: 'bundle exec rake'
-
 secure: "Oc671phAMWhqtRAQLjwVvfd8LcOzq+bW5Y7SvXTho1wTZd9LfB6PJHIFDobBwkSjgacLAf5w+YVRa0jbpBVRDqWEU7TofpseNdXZua43jcg46Hh1BsQoy/q+U1eLgVelsSzkdNqm/RJ1W3I1zXsC8nQiKq+h9wGuOhQn4mn/7ILyU3x0BAULuYhgWY0TofCrBZ5h3Tk2fBtehbl98/IsI+Y0Jv22MyOFtPTT3PvLLmCWQNgv8Xg1Uye2LVu6oyBRO4FKSNHy9hIEChXY5dh77Ov6a0jUrkk9CZFfYb9h+EF/7xz/43KeYhA7C79pgwLacmngtGXt/ovBHDYBcwt66kiFYddSZYE5sC4D4M7GSgeQq4p5IYylYIiNm2t9Xxo7N2EoYnhKwyb2JQ4EFelUH+NVdBIn38XGljB2Ttd7TMTm0TeZVV6jp1SDGvb0g6+SdsThZLzifrxo/MZlsP1Iox6YV1Nj8wqST0cTnIlsNaWM2X33pjN+fuM1PxwSYiAey2FQVVVEkaL6mijkoopSVcedco3vJN9d5h8SGsxjWPF6UgNiyqKPI832TbhLB8bn7r8to5QPN3MQoP0nVxTpa2I3f+Hq5mgSLFDwFD37CMHEY8pDES/CUCo5OJ9GdLipnGCKKucJMdtvh46xIYYFkjNHJhSlF2um/VHclX5GuWM="
+
+script: 'bundle exec rake'
 
 notifications:
   email:
