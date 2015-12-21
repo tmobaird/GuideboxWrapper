@@ -7,8 +7,9 @@ rvm:
 script: 'bundle exec rake'
 
 notifications:
-	email:
-		recipients:
-			- tbaird@mail.umw.edu
-		on_failure: change
-		on_success: never
+  email:
+    recipients:
+      - tmobaird@gmail.com
+      - tbaird@mail.umw.edu
+    on_success: change # default: change
+    on_failure: always # default: always
