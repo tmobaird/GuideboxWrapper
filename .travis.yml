@@ -1,3 +1,14 @@
 language: ruby
+cache: bundler 
+
 rvm:
   - 2.2.1
+
+script: 'bundle exec rake'
+
+notifications:
+	email:
+		recipients:
+			- tbaird@mail.umw.edu
+		on_failure: change
+		on_success: never

@@ -3,9 +3,7 @@
 [![Coverage Status](https://coveralls.io/repos/tmobaird/GuideboxWrapper/badge.svg?branch=master&service=github)](https://coveralls.io/github/tmobaird/GuideboxWrapper?branch=master)
 [![Code Climate](https://codeclimate.com/github/tmobaird/GuideboxWrapper/badges/gpa.svg)](https://codeclimate.com/github/tmobaird/GuideboxWrapper)
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/GuideboxWrapper`. To experiment with that code, run `bin/console` for an interactive prompt.
-
-TODO: Delete this and the text above, and describe your gem
+Guidebox Wrapper is a Ruby Wrapper for the Guidebox API. The Guidebox API contains tons of information about tv shows and movies. This gem will help you extract data from this API in a simple way. It contains an array of different methods that allow you to obtain different information about a movie/tv show. 
 
 ## Installation
 
@@ -24,6 +22,10 @@ Or install it yourself as:
     $ gem install GuideboxWrapper
 
 ## Usage
+
+To use this gem you must first register for a personal API key on Guidebox's website. This registration page can be found here: [Guidebox API key registration page](https://api.guidebox.com/production-key). Once you obtain your personal API key (which should be randomized string of numbers and characters) you will be able to start using this gem.
+
+Keep in mind that Guidebox has some restrictions on the amount of API calls that can be made per month and per second. The API is limited to 100,000 API calls a month and 1 API call per second. The monthy limit of 100,000 will reset on the 1st of every month. 
 
 Will be updated as soon as Gem is completed and pushed up to RubyGem Repo
 

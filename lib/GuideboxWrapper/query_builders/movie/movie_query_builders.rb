@@ -15,7 +15,7 @@ module MovieQueryBuilders
   def search_and_set_url(name)
     id = self.search_for(name).first["id"]
     url = @base_url
-    url += "/movie/" + id.to_s
+    url + "/movie/" + id.to_s
   end
 
   def set_name_or_id(name_or_id)

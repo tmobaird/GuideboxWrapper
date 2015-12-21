@@ -8,7 +8,7 @@ module GuideboxWrapper
       url = build_query(name)
       url += '/fuzzy/web'
       data = @client.query(url)
-      results = data["results"]
+      data["results"]
     end
 
     # Search by provider
@@ -16,16 +16,13 @@ module GuideboxWrapper
       url = build_query(name)
       url += '/fuzzy/' + provider + '/web'
       data = @client.query(url)
-      results = data["results"]
+      data["results"]
     end
 
     def search_by_db_id(id, type)
       url = @base_url
       url += "/search/movie/id/"
       case type
-      when "tvdb"
-        url += "tvdb/"
-        url += id.to_s
       when "themoviedb"
         url += "themoviedb/"
         url += id.to_s
@@ -176,32 +173,32 @@ module GuideboxWrapper
       url = @base_url
       id = set_name_or_id(name_or_id)
       url += "/movie/" + id.to_s + "/images/posters"
-      puts url
-      @client.query(url)
+      results = @client.query(url)
+      results["results"]["posters"]
     end
 
     def thumbnail_images(name_or_id)
       url = @base_url
       id = set_name_or_id(name_or_id)
       url += "/movie/" + id.to_s + "/images/thumbnails"
-      puts url
-      @client.query(url)
+      results = @client.query(url)
+      results["results"]["thumbnails"]
     end
 
     def banner_images(name_or_id)
       url = @base_url
       id = set_name_or_id(name_or_id)
       url += "/movie/" + id.to_s + "/images/banners"
-      puts url
-      @client.query(url)
+      results = @client.query(url)
+      results["results"]["banners"]
     end
 
     def background_images(name_or_id)
       url = @base_url
       id = set_name_or_id(name_or_id)
       url += "/movie/" + id.to_s + "/images/backgrounds"
-      puts url
-      @client.query(url)
+      results = @client.query(url)
+      results["results"]["backgrounds"]
     end
 
     def free_web_sources(name)

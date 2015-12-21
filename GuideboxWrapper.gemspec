@@ -9,13 +9,13 @@ Gem::Specification.new do |spec|
   spec.authors       = ["Thomas Baird"]
   spec.email         = ["tbaird@mail.umw.edu"]
 
-  if spec.respond_to?(:metadata)
-    spec.metadata['allowed_push_host'] = "TODO: Set to 'http://mygemserver.com' to prevent pushes to rubygems.org, or delete to allow pushes to any server."
-  end
+  # if spec.respond_to?(:metadata)
+  #   spec.metadata['allowed_push_host'] = "TODO: Set to 'http://mygemserver.com' to prevent pushes to rubygems.org, or delete to allow pushes to any server."
+  # end
 
   spec.summary       = %q{A ruby wrapper for the Guidebox API.}
   spec.description   = %q{This gem is a ruby wrapper for the Guidebox API. Guidebox is a big database of movie/tv-show information. This gem allows you to query this api easily for different pieces of data.}
-  spec.homepage      = "TODO: Put your gem's website or public repo URL here."
+  spec.homepage      = "https://github.com/tmobaird/GuideboxWrapper"
   spec.license       = "MIT"
 
   spec.files         = `git ls-files -z`.split("\x0").reject { |f| f.match(%r{^(test|spec|features)/}) }

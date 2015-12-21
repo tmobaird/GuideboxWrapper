@@ -8,7 +8,7 @@ module GuideboxWrapper
       url = build_query(name)
       url += '/fuzzy/web'
       data = @client.query(url)
-      results = data["results"]
+      data["results"]
     end
 
     # Search by provider
@@ -16,7 +16,7 @@ module GuideboxWrapper
       url = build_query(name)
       url += '/fuzzy/' + provider + "/web"
       data = @client.query(url)
-      results = data["results"]
+      data["results"]
     end
 
     # Search for show by external db id
