@@ -2,7 +2,8 @@ require 'spec_helper'
 
 describe GuideboxWrapper do
   describe "GuideboxMovie" do
-    let!(:guidebox) { GuideboxWrapper::Movie.new(ENV["MY_API_KEY"], "all") }
+    let(:guidebox) { GuideboxWrapper::Movie.new(ENV["MY_API_KEY"], "all") }
+    after { sleep(1) }
     describe "#search_for" do
       it "returns Star Wars: A New Hope" do
         results = guidebox.search_for("star wars a new hope")
