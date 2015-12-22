@@ -1,7 +1,7 @@
 # GuideboxWrapper
 
 [![Code Climate](https://codeclimate.com/github/tmobaird/GuideboxWrapper/badges/gpa.svg)](https://codeclimate.com/github/tmobaird/GuideboxWrapper)
-[![Code Climate](https://codeclimate.com/github/tmobaird/GuideboxWrapper/badges/gpa.svg)](https://codeclimate.com/github/tmobaird/GuideboxWrapper)
+[![Test Coverage](https://codeclimate.com/github/tmobaird/GuideboxWrapper/badges/coverage.svg)](https://codeclimate.com/github/tmobaird/GuideboxWrapper/coverage)
 [![Build Status](https://travis-ci.org/tmobaird/GuideboxWrapper.svg?branch=master)](https://travis-ci.org/tmobaird/GuideboxWrapper)
 
 Guidebox Wrapper is a Ruby Wrapper for the Guidebox API. The Guidebox API contains tons of information about tv shows and movies. This gem will help you extract data from this API in a simple way. It contains an array of different methods that allow you to obtain different information about a movie/tv show. 
