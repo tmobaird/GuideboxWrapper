@@ -8,6 +8,7 @@ module GuideboxWrapper
       url = build_query(name)
       url += '/fuzzy/web'
       data = @client.query(url)
+      sleep(1)
       data["results"]
     end
 

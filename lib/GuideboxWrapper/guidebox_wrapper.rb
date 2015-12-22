@@ -5,7 +5,6 @@ require 'open-uri'
 module GuideboxWrapper
   class Client
     def query(url)
-      puts url
       JSON.parse(open(url).read)
     end
   end
