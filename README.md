@@ -1,6 +1,6 @@
 # GuideboxWrapper
 
-[![Coverage Status](https://coveralls.io/repos/tmobaird/GuideboxWrapper/badge.svg?branch=master&service=github)](https://coveralls.io/github/tmobaird/GuideboxWrapper?branch=master)
+[![Code Climate](https://codeclimate.com/github/tmobaird/GuideboxWrapper/badges/gpa.svg)](https://codeclimate.com/github/tmobaird/GuideboxWrapper)
 [![Code Climate](https://codeclimate.com/github/tmobaird/GuideboxWrapper/badges/gpa.svg)](https://codeclimate.com/github/tmobaird/GuideboxWrapper)
 [![Build Status](https://travis-ci.org/tmobaird/GuideboxWrapper.svg?branch=master)](https://travis-ci.org/tmobaird/GuideboxWrapper)
 
