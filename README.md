@@ -30,6 +30,13 @@ Keep in mind that Guidebox has some restrictions on the amount of API calls that
 
 Will be updated as soon as Gem is completed and pushed up to RubyGem Repo
 
+The API helpers throughout this gem can be called on either Tv or Movie objects. These objects can be initialized by doing the following:
+
+```ruby
+GuideboxWrapper::Tv.new("YOUR_API_KEY", "region") # region can be "all", "US" (United States), "GB" (Great Britain), etc
+GuideboxWrapper::Movie.new("YOUR_API_KEY", "region")
+```
+
 ## Development
 
 After checking out the repo, run `bin/setup` to install dependencies. Then, run `bin/console` for an interactive prompt that will allow you to experiment.

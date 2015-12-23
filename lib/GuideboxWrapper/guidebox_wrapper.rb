@@ -16,5 +16,11 @@ module GuideboxWrapper
       @client = Client.new
     end
 
+    def quota
+      url = @base_url + "/quota"
+      results = @client.query(url)
+      results["monthly_quota"]["current"]
+    end
+
   end
 end
