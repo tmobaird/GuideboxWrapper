@@ -197,7 +197,8 @@ module GuideboxWrapper
       url = @base_url
       id = set_name_or_id(name_or_id)
       url += "/show/" + id.to_s + "/images/posters"
-      @client.query(url)
+      results = @client.query(url)
+      results["results"]["posters"]
     end
 
     # Gets all show thumbnail images by name or id
@@ -205,7 +206,8 @@ module GuideboxWrapper
       url = @base_url
       id = set_name_or_id(name_or_id)
       url += "/show/" + id.to_s + "/images/thumbnails"
-      @client.query(url)
+      results = @client.query(url)
+      results["results"]["thumbnails"]
     end
 
     # Gets all show banner images by name or id
@@ -213,7 +215,8 @@ module GuideboxWrapper
       url = @base_url
       id = set_name_or_id(name_or_id)
       url += "/show/" + id.to_s + "/images/banners"
-      @client.query(url)
+      results = @client.query(url)
+      results["results"]["banners"]
     end
 
     # Gets all show background images by name or id
@@ -221,7 +224,8 @@ module GuideboxWrapper
       url = @base_url
       id = set_name_or_id(name_or_id)
       url += "/show/" + id.to_s + "/images/backgrounds"
-      @client.query(url)
+      results = @client.query(url)
+      results["results"]["backgrounds"]
     end
   end
 end

@@ -148,25 +148,25 @@ describe GuideboxWrapper do
     end
     describe "#posters" do
       it "includes xlarge poster with link" do
-        poster = guidebox.posters("entourage")["results"]["posters"].first["xlarge"]["url"]
+        poster = guidebox.posters("entourage").first["xlarge"]["url"]
         expect(poster).to eq("http:\/\/static-api.guidebox.com\/012915\/shows\/posters\/6085-3725524591-5295090941-3912000982-600x855.jpg")
       end
     end
     describe "#thumbnail_images" do
       it "includes thumbnail image with link" do
-        thumbnail = guidebox.thumbnail_images("entourage")["results"]["thumbnails"].first["xlarge"]["url"]
+        thumbnail = guidebox.thumbnail_images("entourage").first["xlarge"]["url"]
         expect(thumbnail).to eq("http:\/\/static-api.guidebox.com\/091414\/thumbnails_xlarge\/6085-6340779560-608x342-show-thumbnail.jpg")
       end
     end
     describe "#banner_images" do
       it "includes banner image with link" do
-        banner = guidebox.banner_images("entourage")["results"]["banners"].first["xlarge"]["url"]
+        banner = guidebox.banner_images("entourage").first["xlarge"]["url"]
         expect(banner).to eq("http:\/\/static-api.guidebox.com\/012915\/shows\/banners\/6085-6918728002-5154230813-6413012026-1300x240.jpg")
       end
     end
     describe "#background_images" do
       it "includes background image with link" do
-        background = guidebox.background_images("entourage")["results"]["backgrounds"].first["original"]["url"]
+        background = guidebox.background_images("entourage").first["original"]["url"]
         expect(background).to eq("http:\/\/static-api.guidebox.com\/012915\/shows\/backgrounds\/6085-96932638085-133215735918-888.jpg")
       end
     end
