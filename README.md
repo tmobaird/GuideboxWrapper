@@ -174,7 +174,7 @@ guidebox_movie.purchase_android_sources("star wars a new hope")
 
 #### Tv Helpers
 
-```
+```ruby
 guidebox_tv = GuideboxWrapper::Tv.new("YOUR_API_KEY", "region")
 
 guidebox_tv.search_for("entourage")
