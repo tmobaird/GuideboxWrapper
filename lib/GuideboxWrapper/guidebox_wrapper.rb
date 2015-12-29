@@ -1,4 +1,3 @@
-require 'pry'
 require 'json'
 require 'open-uri'
 
