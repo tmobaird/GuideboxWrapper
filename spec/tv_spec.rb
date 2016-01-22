@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe GuideboxWrapper do
   describe "GuideboxTv" do
-    let!(:guidebox) { GuideboxWrapper::Tv.new(ENV["MY_API_KEY"], "all") }
+    let!(:guidebox) { GuideboxWrapper::GuideboxTv.new(ENV["MY_API_KEY"], "all") }
     after { sleep(1.5) }
     describe "#search_for" do
       it "includes entourage" do

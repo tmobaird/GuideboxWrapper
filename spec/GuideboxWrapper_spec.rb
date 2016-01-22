@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe GuideboxWrapper do
-  let(:guidebox) { GuideboxWrapper::Movie.new(ENV["MY_API_KEY"], "all")}
+  let(:guidebox) { GuideboxWrapper::GuideboxMovie.new(ENV["MY_API_KEY"], "all")}
   it 'has a version number' do
     expect(GuideboxWrapper::VERSION).not_to be nil
   end

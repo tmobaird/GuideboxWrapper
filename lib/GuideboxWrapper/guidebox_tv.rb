@@ -1,7 +1,7 @@
 require 'GuideboxWrapper/query_builders/tv/tv_query_builders'
 
 module GuideboxWrapper
-  class Tv < GuideboxApi
+  class GuideboxTv < GuideboxApi
     include TvQueryBuilders
     # Search for show
     def search_for(name)
