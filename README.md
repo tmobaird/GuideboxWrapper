@@ -86,7 +86,7 @@ guidebox_movie.fetch_movie("star wars a new hope")
 
 #### Accessbile Movie Attributes
 
-```
+```ruby
 :id, :title, :release_year, :cast, :writers, :directors, :release_date, :rating, :duration, :themoviedb_id, :imdb_id
 :rotten_tomatoes_id, :alternate_titles, :freebase, :wikipedia_id, :metacritic_link, :overview, :genres, :tags, :facebook_link
 :web_trailers, :ios_trailers, :android_trailers, :free_web_sources, :free_ios_sources, :free_android_sources, :tv_everywhere_web_sources
@@ -94,7 +94,7 @@ guidebox_movie.fetch_movie("star wars a new hope")
 :purchase_android_sources
 ```
 These can be easily accessed as follows:
-```
+```ruby
 guidebox_movie = GuideboxWrapper::GuideboxMovie.new("YOUR_API_KEY", "region")
 movie = guidebox_movie.fetch_movie("star wars a new hope")
 
