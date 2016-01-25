@@ -50,7 +50,10 @@ module GuideboxWrapper
       id = set_name_or_id(name_or_id)
       url += "/movie/" + id.to_s 
       results = @client.query(url)
-      Movie.new(results)
+      url += "/images/all"
+      images_results = @client.query(url)
+      images = images_results["results"]
+      Movie.new(results, images)
     end
 
     def posters(name_or_id)
