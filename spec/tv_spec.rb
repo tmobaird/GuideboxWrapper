@@ -31,119 +31,134 @@ describe GuideboxWrapper do
         end
       end
     end
+    describe "#fetch_tv_show_by_db_id" do
+      context "imdb id" do
+        it "returns tv object attributes for always sunny in philadelphia" do
+          sunny = guidebox.fetch_tv_show_by_db_id("tt0472954", "imdb")
+          expect(sunny).to have_attributes(:id => 612, :title => "It's Always Sunny in Philadelphia", :first_aired => "2005-08-04", :rating => "TV-MA")
+        end
+      end
+      context "tvdb id" do
+        it "returns tv object attributes for always sunny in philadelphia" do
+          sunny = guidebox.fetch_tv_show_by_db_id(75805, "tvdb")
+          expect(sunny).to have_attributes(:id => 612, :title => "It's Always Sunny in Philadelphia", :first_aired => "2005-08-04", :rating => "TV-MA")
+        end
+      end
+      context "the movie db id" do
+        it "returns tv object attributes for always sunny in philadelphia" do
+          sunny = guidebox.fetch_tv_show_by_db_id(2710, "themoviedb")
+          expect(sunny).to have_attributes(:id => 612, :title => "It's Always Sunny in Philadelphia", :first_aired => "2005-08-04", :rating => "TV-MA")   
+        end
+      end
+    end
     describe "#show_information" do
       it "returns entourage show" do
         expect(guidebox.show_information("entourage")["id"]).to eq(6085)
       end
     end
-    describe "#status" do
-      it "returns ended" do
-        expect(guidebox.status("entourage")).to eq("Ended")
+    describe "#fetch_tv_show" do
+      it "returns a tv object with attributes" do
+        sunny = guidebox.fetch_tv_show("always sunny in philadelphia")
+        expect(sunny).to have_attributes(:id => 612, :title => "It's Always Sunny in Philadelphia", :first_aired => "2005-08-04", :rating => "TV-MA")   
       end
-    end
-    describe "#seasons" do
-      it "returns 8 seasons" do
-        expect(guidebox.seasons("entourage").size).to eq(8)
-      end
-    end
-    describe "#cast" do
-      it "has value Jeremy Piven" do
-        expect_cast = guidebox.cast("entourage").find { |h| h["name"] == "Jeremy Piven" }
-        expect(expect_cast["name"]).to eq("Jeremy Piven")
-      end
-    end
-    describe "#type" do
-      it "returns television" do
-        expect(guidebox.type("entourage")).to eq("television")
-      end
-    end
-    describe "#first_aired" do
-      it "returns 2004-07-18" do
-        expect(guidebox.first_aired("entourage")).to eq("2004-07-18")
-      end
-    end
-    describe "#network" do
-      it "returns HBO" do
-        expect(guidebox.network("entourage")).to eq("HBO")
-      end
-    end
-    describe "#channel_information" do
-      it "includes HBO" do
-        expect(guidebox.channel_information("entourage").first["name"]).to eq("HBO")
-      end
-    end
-    describe "#runtime" do
-      it do
-        expect(guidebox.runtime("entourage")).to eq(30)
-      end
-    end
-    describe "#genres" do
-      it "returns an array with Comedy and Drama" do
-        genres = guidebox.genres("entourage").map{ |x| x["title"] }
-        expect(genres).to include("Comedy")
-        expect(genres).to include("Drama")
-      end
-    end
-    describe "#tags" do
-      it "has array of 16 tags" do
-        expect(guidebox.tags("entourage").size).to eq(16)
-      end
-      it "includes womanizer and hollywood" do
-        tags = guidebox.tags("entourage").map{ |x| x["tag"] }
-        expect(tags).to include("womanizer")
-        expect(tags).to include("hollywood")
-      end
-    end
-    describe "#overview" do
-      it "returns the shows overview" do
-        expect(guidebox.overview("entourage")).to eq("Vincent Chase is a young actor whose career is on the rise. Joining him on his journey to stardom are his childhood buddies Eric, Turtle, his brother Johnny Drama and his hot-tempered agent Ari Gold. Together, they'll navigate the highs and lows of Hollywood's fast lane, where the stakes are higher -- and the money and temptations greater -- than ever before. ")
-      end
-    end
-    describe "#air_day_of_week" do
-      it "returns Sunday" do
-        expect(guidebox.air_day_of_week("entourage")).to eq("Sunday")
-      end
-    end
-    describe "#air_time" do
-      it "returns 10:30 PM" do
-        expect(guidebox.air_time("entourage")).to eq("10:30 PM")
-      end
-    end
-    describe "#rating" do
-      it "returns TV-MA" do
-        expect(guidebox.rating("entourage")).to eq("TV-MA")
-      end
-    end
-    describe "#imdb_id" do
-      it "returns tt0387199" do
-        expect(guidebox.imdb_id("entourage")).to eq("tt0387199")
-      end
-    end
-    describe "#metacritic_link" do
-      it "returns metacritic link" do
-        expect(guidebox.metacritic_link("entourage")).to eq("http:\/\/www.metacritic.com\/tv\/entourage")
-      end
-    end
-    describe "#wikipedia_id" do
-      it "returns 907282" do
-        expect(guidebox.wikipedia_id("entourage")).to eq(907282)
-      end
-    end
-    describe "#facebook_link" do
-      it "returns facebook link" do
-        expect(guidebox.facebook_link("entourage")).to eq("https:\/\/www.facebook.com\/Entourage")
-      end
-    end
-    describe "#twitter_link" do
-      it "returns twitter link" do
-        expect(guidebox.twitter_link("entourage")).to eq(nil)
-      end
-    end
-    describe "#related" do
-      it "includes Suits" do
-        related = guidebox.related_shows("entourage")["results"].map{ |x| x["title"] }
-        expect(related).to include("Suits")
-        expect(related).to include("How I Met Your Mother")
+      describe "Tv" do
+        before(:all) do
+          guidebox_wrapper = GuideboxWrapper::GuideboxTv.new(ENV["MY_API_KEY"], "all")
+          @sunny = guidebox_wrapper.fetch_tv_show("always sunny in philadelphia")
+        end
+        it "has tv information attributes" do
+          expect(@sunny).to have_attributes(:id => 612, :title => "It's Always Sunny in Philadelphia", :air_day_of_week => "Wednesday", :air_time => "10:00 PM", :fanart => "http://static-api.guidebox.com/041014/fanart/612-0-0-0-131663791960-123862804587-18376520218-tv.jpg", :first_aired => "2005-08-04", :freebase => "/m/07ct0z", :imdb_id => "tt0472954", :network => "FXX", :rating => "TV-MA", :runtime => 30)
+        end
+        describe "seasons=" do
+          it "returns nil before called" do
+            expect(@sunny.seasons).to eq(nil)
+          end
+          it "returns 11 for season total after called" do
+            @sunny.seasons=(ENV["MY_API_KEY"])
+            expect(@sunny.season_total).to eq(11)
+          end
+        end
+        describe "sources=" do
+          context "when sources are not set" do
+            it "returns must set sources message" do
+              expect(@sunny.web_sources).to eq("You need to call sources=(api_key) first")
+            end
+          end
+          context "when sources are set" do
+            before(:all) { @sunny.sources=(ENV["MY_API_KEY"]) }
+            it "has does not return not set message" do
+              expect(@sunny.web_sources).to_not eq("You need to call sources=(api_key) first")
+            end
+            describe "#web_sources" do
+              it "includes amazon prime" do
+                expect(@sunny.web_sources["episodes"]["all_sources"]).to include({"id"=>146, "source"=>"amazon_buy", "display_name"=>"Amazon", "type"=>"purchase"})
+              end
+            end
+            describe "#ios_sources" do
+              it "includes itunes" do
+                expect(@sunny.ios_sources["episodes"]["all_sources"]).to include({"id"=>145, "source"=>"itunes", "display_name"=>"iTunes", "type"=>"purchase"})
+              end
+            end
+            describe "#android_sources" do
+              it "includes google play" do
+                expect(@sunny.android_sources["episodes"]["all_sources"]).to include({"id"=>148, "source"=>"google_play", "display_name"=>"Google Play", "type"=>"purchase"})
+              end
+            end
+            describe '#free_sources' do
+              it "returns an empty array" do
+                expect(@sunny.free_sources).to eq([])
+              end
+            end
+            describe '#subscription_sources' do
+              it "includes amazon prime" do
+                expect(@sunny.subscription_sources).to include({"id"=>13, "source"=>"amazon_prime", "display_name"=>"Amazon Prime", "type"=>"web"})
+              end
+            end
+            describe '#purchase_sources' do
+              it "includes amazon_buy" do
+                expect(@sunny.purchase_sources).to include({"id"=>146, "source"=>"amazon_buy", "display_name"=>"Amazon", "type"=>"web"})
+              end
+            end
+          end
+        end
+        describe "related=" do
+          context "when related is not set" do
+            it 'returns nil' do
+              expect(@sunny.related).to eq(nil)
+            end
+          end
+          context "when related is set" do
+            before(:all) { @sunny.related=(ENV["MY_API_KEY"]) }
+            it "does not return nil" do
+              expect(@sunny.related).to_not eq(nil)
+            end
+            describe "#related" do
+              it "includes the office" do
+                expect(@sunny.related.first["title"]).to eq("The Office")
+              end
+            end
+          end
+        end
+        describe "#small_artwork" do
+          it "returns url to artwork" do
+            expect(@sunny.small_artwork).to eq("http://static-api.guidebox.com/091414/thumbnails_small/612-6098058661-208x117-show-thumbnail.jpg")
+          end
+        end
+        describe "#medium_artwork" do
+          it "returns url to artwork" do
+            expect(@sunny.medium_artwork).to eq("http://static-api.guidebox.com/091414/thumbnails_medium/612-5730778291-304x171-show-thumbnail.jpg")
+          end
+        end
+        describe "#large_artwork" do
+          it "returns url to artwork" do
+            expect(@sunny.large_artwork).to eq("http://static-api.guidebox.com/091414/thumbnails_large/612-6969761858-448x252-show-thumbnail.jpg")
+          end
+        end
+        describe "#xlarge_artwork" do
+          it "returns url to artwork" do
+            expect(@sunny.xlarge_artwork).to eq("http://static-api.guidebox.com/091414/thumbnails_xlarge/612-1023839778-608x342-show-thumbnail.jpg")
+          end
+        end
       end
     end
     describe "#posters" do

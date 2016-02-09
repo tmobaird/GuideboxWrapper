@@ -8,6 +8,7 @@ module GuideboxWrapper
     end
   end
   class GuideboxApi
+    attr_reader :region, :base_url, :client
     def initialize(key, region)
       @key = key
       @region = region
