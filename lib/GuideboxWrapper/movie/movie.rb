@@ -21,8 +21,7 @@ module GuideboxWrapper
 				wrapper = GuideboxWrapper::GuideboxMovie.new(api_key, "all")
 				url = wrapper.base_url
 				url += "/movie/" + @id.to_s + "/images/all"
-      			images_results = wrapper.client.query(url)
-      			images = images_results["results"]
+      			images = wrapper.client.query(url)["results"]
       			@posters = images["posters"]
 		    	@backgrounds = images["backgrounds"]
 		    	@banners = images["banners"]

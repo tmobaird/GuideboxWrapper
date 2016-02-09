@@ -19,8 +19,7 @@ module GuideboxWrapper
 				wrapper = GuideboxWrapper::GuideboxTv.new(api_key, "all")
 				url = wrapper.base_url
 				url += "/show/" + @id.to_s + "/images/all"
-      			images_results = wrapper.client.query(url)
-      			images = images_results["results"]
+      			images = wrapper.client.query(url)["results"]
       			@posters = images["posters"]
 		    	@backgrounds = images["backgrounds"]
 		    	@banners = images["banners"]
@@ -44,8 +43,7 @@ module GuideboxWrapper
 				wrapper = GuideboxWrapper::GuideboxTv.new(api_key, "all")
 				url = wrapper.base_url
       			url += "/show/" + @id.to_s + "/available_content"
-      			results = wrapper.client.query(url)
-      			@sources = results["results"]
+      			@sources = wrapper.client.query(url)["results"]
 			end
 		end
 
@@ -54,8 +52,7 @@ module GuideboxWrapper
 				wrapper = GuideboxWrapper::GuideboxTv.new(api_key, "all")
 				url = wrapper.base_url
       			url += "/show/" + @id.to_s + "/related"
-      			results = wrapper.client.query(url)
-      			@related = results["results"]
+      			@related = wrapper.client.query(url)["results"]
 			end
 		end
 
