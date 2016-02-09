@@ -66,7 +66,7 @@ module GuideboxWrapper
 
 		def free_sources
 			if @sources != nil
-				free = add_sources("free")
+				add_sources("free")
 			else
 				"You need to call sources=(api_key) first"
 			end
@@ -74,7 +74,7 @@ module GuideboxWrapper
 
 		def subscription_sources
 			if @sources != nil
-				subscription = add_sources("subscription")
+				add_sources("subscription")
 			else
 				"You need to call sources=(api_key) first"
 			end
@@ -82,7 +82,7 @@ module GuideboxWrapper
 
 		def purchase_sources
 			if @sources != nil
-				purchase = add_sources("purchase")
+				add_sources("purchase")
 			else
 				"You need to call sources=(api_key) first"
 			end

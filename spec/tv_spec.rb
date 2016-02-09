@@ -164,7 +164,7 @@ describe GuideboxWrapper do
             end
             describe "#related" do
               it "includes the office" do
-                expect(@sunny.related.first["title"]).to eq("The Office")
+                expect(@sunny.related).to include({"id"=>205, "title"=>"The Office", "alternate_titles"=>["The Office US", "The Office (US)"], "container_show"=>0, "first_aired"=>"2005-03-24", "imdb_id"=>"tt0386676", "tvdb"=>73244, "themoviedb"=>2316, "freebase"=>"/m/08jgk1", "wikipedia_id"=>2995553, "tvrage"=>{"tvrage_id"=>6061, "link"=>"http://www.tvrage.com/shows/id-6061"}, "artwork_208x117"=>"http://static-api.guidebox.com/thumbnails_small/205-5041042548-208x117.jpg", "artwork_304x171"=>"http://static-api.guidebox.com/thumbnails_medium/205-794024850-304x171.jpg", "artwork_448x252"=>"http://static-api.guidebox.com/thumbnails_large/205-8452868517-448x252.jpg", "artwork_608x342"=>"http://static-api.guidebox.com/thumbnails_xlarge/205-657829540-608x342.jpg"})
               end
             end
           end
