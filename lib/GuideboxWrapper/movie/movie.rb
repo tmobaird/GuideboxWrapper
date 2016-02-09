@@ -1,8 +1,9 @@
 module GuideboxWrapper
 	class Movie 
 		attr_reader :id, :title, :release_year, :cast, :writers, :directors, :release_date, :rating, :duration, :themoviedb, :imdb, :rottentomatoes, :alternate_titles, :freebase, :wikipedia_id, :metacritic, :overview, :genres, :tags, :facebook_link, :web_trailers, :ios_trailers, :android_trailers, :free_web_sources, :free_ios_sources, :free_android_sources, :tv_everywhere_web_sources, :tv_everywhere_ios_sources, :tv_everywhere_android_sources, :subscription_web_sources, :purchase_web_sources, :purchase_ios_sources, :purchase_android_sources, :posters, :backgrounds, :banners, :thumbnails
+		attr_accessor :posters, :backgrounds, :banners, :thumbnails
 
-		def initialize(movie_info, images)
+		def initialize(movie_info)
 			excluded_keys = ["common_sense_media", "poster_120x171", "poster_240x342", "poster_400x570", "social", "trailers"]
 			movie_info.each do |key, value|
 				unless excluded_keys.include?(key)
@@ -13,10 +14,20 @@ module GuideboxWrapper
 			@web_trailers = movie_info["trailers"]["web"]
 			@ios_trailers = movie_info["trailers"]["ios"]
 			@android_trailers = movie_info["trailers"]["android"]
-			@posters = images["posters"]
-		    @backgrounds = images["backgrounds"]
-		    @banners = images["banners"]
-		    @thumbnails = images["thumbnails"]
+		end
+
+		def images=(api_key)
+			if @posters == nil
+				wrapper = GuideboxWrapper::GuideboxMovie.new(api_key, "all")
+				url = wrapper.base_url
+				url += "/movie/" + @id.to_s + "/images/all"
+      			images_results = wrapper.client.query(url)
+      			images = images_results["results"]
+      			@posters = images["posters"]
+		    	@backgrounds = images["backgrounds"]
+		    	@banners = images["banners"]
+		    	@thumbnails = images["thumbnails"]
+			end
 		end
 
 		def large_posters

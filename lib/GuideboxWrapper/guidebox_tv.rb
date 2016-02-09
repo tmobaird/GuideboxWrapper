@@ -77,41 +77,5 @@ module GuideboxWrapper
       results = @client.query(url)
       Tv.new(results)
     end
-
-    # Gets all tv show movie posters
-    def posters(name_or_id)
-      url = @base_url
-      id = set_name_or_id(name_or_id)
-      url += "/show/" + id.to_s + "/images/posters"
-      results = @client.query(url)
-      results["results"]["posters"]
-    end
-
-    # Gets all show thumbnail images by name or id
-    def thumbnail_images(name_or_id)
-      url = @base_url
-      id = set_name_or_id(name_or_id)
-      url += "/show/" + id.to_s + "/images/thumbnails"
-      results = @client.query(url)
-      results["results"]["thumbnails"]
-    end
-
-    # Gets all show banner images by name or id
-    def banner_images(name_or_id)
-      url = @base_url
-      id = set_name_or_id(name_or_id)
-      url += "/show/" + id.to_s + "/images/banners"
-      results = @client.query(url)
-      results["results"]["banners"]
-    end
-
-    # Gets all show background images by name or id
-    def background_images(name_or_id)
-      url = @base_url
-      id = set_name_or_id(name_or_id)
-      url += "/show/" + id.to_s + "/images/backgrounds"
-      results = @client.query(url)
-      results["results"]["backgrounds"]
-    end
   end
 end

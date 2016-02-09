@@ -1,7 +1,7 @@
 module GuideboxWrapper
 	class Tv
 		attr_reader :id, :title, :alternative_titles, :status, :first_aired, :network, :channels, :runtime, :genres, :tags, :cast, :overview, :air_day_of_week, :air_time, :rating, :imdb_id, :tvdb, :themoviedb, :freebase, :tv_com, :metacritic, :wikipedia_id, :tvrage, :fanart, :poster, :banner, :url, :artwork, :social
-		attr_accessor :seasons, :season_total, :related
+		attr_accessor :seasons, :season_total, :related, :posters, :banners, :thumbnails, :backgrounds
 
 		def initialize(show_info)
 			excluded_keys = ["common_sense_media", "type", "artwork_208x117", "artwork_304x171", "artwork_448x252", "artwork_608x342"]
@@ -12,6 +12,20 @@ module GuideboxWrapper
 			end
 			@facebook_link = show_info["social"]["facebook"]["link"]
 			@artwork = { "artwork_208x117" => show_info["artwork_208x117"], "artwork_304x171" => show_info["artwork_304x171"], "artwork_448x252" => show_info["artwork_448x252"], "artwork_608x342" => show_info["artwork_608x342"] }
+		end
+
+		def images=(api_key)
+			if @posters == nil
+				wrapper = GuideboxWrapper::GuideboxTv.new(api_key, "all")
+				url = wrapper.base_url
+				url += "/show/" + @id.to_s + "/images/all"
+      			images_results = wrapper.client.query(url)
+      			images = images_results["results"]
+      			@posters = images["posters"]
+		    	@backgrounds = images["backgrounds"]
+		    	@banners = images["banners"]
+		    	@thumbnails = images["thumbnails"]
+			end
 		end
 
 		def seasons=(api_key)

@@ -69,6 +69,36 @@ describe GuideboxWrapper do
         it "has tv information attributes" do
           expect(@sunny).to have_attributes(:id => 612, :title => "It's Always Sunny in Philadelphia", :air_day_of_week => "Wednesday", :air_time => "10:00 PM", :fanart => "http://static-api.guidebox.com/041014/fanart/612-0-0-0-131663791960-123862804587-18376520218-tv.jpg", :first_aired => "2005-08-04", :freebase => "/m/07ct0z", :imdb_id => "tt0472954", :network => "FXX", :rating => "TV-MA", :runtime => 30)
         end
+        describe "images=" do
+          context "when sources are not set" do
+            it "returns nil before called" do
+              expect(@sunny.posters).to eq(nil)
+            end
+          end
+          context "when sources are set" do
+            before(:all) { @sunny.images=(ENV["MY_API_KEY"]) }
+            describe "posters" do
+              it "has url to xlarge poster" do
+                expect(@sunny.posters.first["xlarge"]["url"]).to eq("http://static-api.guidebox.com/012915/shows/posters/612-3167530731-3530702070-5681527415-600x855.jpg")
+              end
+            end
+            describe "banners" do
+              it "has url to xlarge banner" do
+                expect(@sunny.banners.first["xlarge"]["url"]).to eq("http://static-api.guidebox.com/012915/shows/banners/612-2966733226-4211336072-1549888831-1300x240.jpg")
+              end
+            end
+            describe "backgrounds" do
+              it "has url to original background" do
+                expect(@sunny.backgrounds.first["original"]["url"]).to eq("http://static-api.guidebox.com/012915/shows/backgrounds/612-65840635314-63617246137-888.jpg")
+              end
+            end
+            describe "thumbnails" do
+              it "has url to xlarge thumbnail" do
+                expect(@sunny.thumbnails.first["xlarge"]["url"]).to eq("http://static-api.guidebox.com/091414/thumbnails_xlarge/612-1023839778-608x342-show-thumbnail.jpg")
+              end
+            end
+          end
+        end
         describe "seasons=" do
           it "returns nil before called" do
             expect(@sunny.seasons).to eq(nil)
@@ -159,30 +189,6 @@ describe GuideboxWrapper do
             expect(@sunny.xlarge_artwork).to eq("http://static-api.guidebox.com/091414/thumbnails_xlarge/612-1023839778-608x342-show-thumbnail.jpg")
           end
         end
-      end
-    end
-    describe "#posters" do
-      it "includes xlarge poster with link" do
-        poster = guidebox.posters("entourage").first["xlarge"]["url"]
-        expect(poster).to eq("http:\/\/static-api.guidebox.com\/012915\/shows\/posters\/6085-3725524591-5295090941-3912000982-600x855.jpg")
-      end
-    end
-    describe "#thumbnail_images" do
-      it "includes thumbnail image with link" do
-        thumbnail = guidebox.thumbnail_images("entourage").first["xlarge"]["url"]
-        expect(thumbnail).to eq("http:\/\/static-api.guidebox.com\/091414\/thumbnails_xlarge\/6085-6340779560-608x342-show-thumbnail.jpg")
-      end
-    end
-    describe "#banner_images" do
-      it "includes banner image with link" do
-        banner = guidebox.banner_images("entourage").first["xlarge"]["url"]
-        expect(banner).to eq("http:\/\/static-api.guidebox.com\/012915\/shows\/banners\/6085-6918728002-5154230813-6413012026-1300x240.jpg")
-      end
-    end
-    describe "#background_images" do
-      it "includes background image with link" do
-        background = guidebox.background_images("entourage").first["original"]["url"]
-        expect(background).to eq("http:\/\/static-api.guidebox.com\/012915\/shows\/backgrounds\/6085-96932638085-133215735918-888.jpg")
       end
     end
   end

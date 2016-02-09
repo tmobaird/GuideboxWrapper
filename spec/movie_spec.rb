@@ -169,79 +169,89 @@ describe GuideboxWrapper do
             expect(@star_wars.purchase_android_sources).to include({"source"=>"google_play", "display_name"=>"Google Play", "link"=>"https://play.google.com/store/movies/details?id=yYNSSNJ0z_U", "app_name"=>"Google Play", "app_link"=>0, "app_required"=>0, "app_download_link"=>"https://play.google.com/store", "formats"=>[{"price"=>"19.99", "format"=>"HD", "type"=>"purchase", "pre_order"=>false}]})
           end
         end
-        describe "#posters" do
-          it "includes link to large poster" do
-            expect(@star_wars.posters.first["large"]).to include("url"=>"http://static-api.guidebox.com/022615/thumbnails_movies/-alt--55413-2929921416-5712237544-4512474872-large-400x570-alt-.jpg")
+        describe "images=" do
+          context "when images are not set" do
+            it "returns nil" do
+              expect(@star_wars.posters).to eq(nil)
+            end
           end
-        end
-        describe "#backgrounds" do
-          it "includes link to original banner" do
-            expect(@star_wars.backgrounds.first["original"]).to include("url"=>"http://static-api.guidebox.com/012915/movies/backgrounds/55413-83836050721-144034282636-0.jpg")
-          end
-        end
-        describe "#banners" do
-          it "includes link to xlarge banner" do
-            expect(@star_wars.banners.first["xlarge"]).to include("url"=>"http://static-api.guidebox.com/012915/movies/banners/55413-9158895025-3035124387-2547398284-1300x240.jpg")
-          end
-        end
-        describe "#thumbnails" do
-          it "includes link to xlarge thumbnail" do
-            expect(@star_wars.thumbnails.first["xlarge"]).to include("url"=>"http://static-api.guidebox.com/012915/movies/thumbnails/55413-4649667824-932900156-9715580251-608x342.jpg")
-          end
-        end
-        describe "#large_posters" do
-          it "includes link to large poster" do
-            expect(@star_wars.large_posters.first).to include("url"=>"http://static-api.guidebox.com/022615/thumbnails_movies/-alt--55413-2929921416-5712237544-4512474872-large-400x570-alt-.jpg")
-          end
-        end
-        describe "#medium_posters" do
-          it "includes link to medium poster" do
-            expect(@star_wars.medium_posters.first).to include("url"=>"http://static-api.guidebox.com/022615/thumbnails_movies_medium/55413-7503386526-8892287802-9208222483-medium-240x342-alt-.jpg")
-          end
-        end
-        describe "#small_posters" do
-          it "includes link to small poster" do
-            expect(@star_wars.small_posters.first).to include("url"=>"http://static-api.guidebox.com/022615/thumbnails_movies_small/55413-2337345113-5651742173-3505870658-small-120x171-alt-.jpg")
-          end
-        end
-        describe "#xlarge_banners" do
-          it "includes link to xlarge banner" do
-            expect(@star_wars.xlarge_banners.first).to include("url"=>"http://static-api.guidebox.com/012915/movies/banners/55413-9158895025-3035124387-2547398284-1300x240.jpg")   
-          end
-        end
-        describe "#large_banners" do
-          it "includes link to large banner" do
-            expect(@star_wars.large_banners.first).to include("url"=>"http://static-api.guidebox.com/012915/movies/banners/55413-9158895025-3035124387-2547398284-1000x185.jpg")     
-          end
-        end
-        describe "#medium_banners" do
-          it "includes link to the medium banner" do
-            expect(@star_wars.medium_banners.first).to include("url"=>"http://static-api.guidebox.com/012915/movies/banners/55413-9158895025-3035124387-2547398284-756x140.jpg")
-          end
-        end
-        describe "#small_banners" do
-          it "includes link to small banner" do
-            expect(@star_wars.small_banners.first).to include("url"=>"http://static-api.guidebox.com/012915/movies/banners/55413-9158895025-3035124387-2547398284-551x102.jpg")  
-          end
-        end
-        describe "xlarge_thumbnails" do
-          it "includes link to xlarge thumbnail" do
-            expect(@star_wars.xlarge_thumbnails.first).to include("url"=>"http://static-api.guidebox.com/012915/movies/thumbnails/55413-4649667824-932900156-9715580251-608x342.jpg")  
-          end
-        end
-        describe "large_thumbnails" do
-          it "includes link to large thumbnail" do
-            expect(@star_wars.large_thumbnails.first).to include("url"=>"http://static-api.guidebox.com/012915/movies/thumbnails/55413-4649667824-932900156-9715580251-448x252.jpg")  
-          end
-        end
-        describe "medium_thumbnails" do
-          it "includes link to medium thumbnail" do
-            expect(@star_wars.medium_thumbnails.first).to include("url"=>"http://static-api.guidebox.com/012915/movies/thumbnails/55413-4649667824-932900156-9715580251-304x171.jpg")  
-          end
-        end
-        describe "small_thumbnails" do
-          it "includes link to small thumbnail" do
-            expect(@star_wars.small_thumbnails.first).to include("url"=>"http://static-api.guidebox.com/012915/movies/thumbnails/55413-4649667824-932900156-9715580251-208x117.jpg")  
+          context "when images are set" do
+            before(:all) { @star_wars.images=(ENV["MY_API_KEY"]) }
+            describe "#posters" do
+              it "includes link to large poster" do
+                expect(@star_wars.posters.first["large"]).to include("url"=>"http://static-api.guidebox.com/022615/thumbnails_movies/-alt--55413-2929921416-5712237544-4512474872-large-400x570-alt-.jpg")
+              end
+            end
+            describe "#backgrounds" do
+              it "includes link to original banner" do
+                expect(@star_wars.backgrounds.first["original"]).to include("url"=>"http://static-api.guidebox.com/012915/movies/backgrounds/55413-83836050721-144034282636-0.jpg")
+              end
+            end
+            describe "#banners" do
+              it "includes link to xlarge banner" do
+                expect(@star_wars.banners.first["xlarge"]).to include("url"=>"http://static-api.guidebox.com/012915/movies/banners/55413-9158895025-3035124387-2547398284-1300x240.jpg")
+              end
+            end
+            describe "#thumbnails" do
+              it "includes link to xlarge thumbnail" do
+                expect(@star_wars.thumbnails.first["xlarge"]).to include("url"=>"http://static-api.guidebox.com/012915/movies/thumbnails/55413-4649667824-932900156-9715580251-608x342.jpg")
+              end
+            end
+            describe "#large_posters" do
+              it "includes link to large poster" do
+                expect(@star_wars.large_posters.first).to include("url"=>"http://static-api.guidebox.com/022615/thumbnails_movies/-alt--55413-2929921416-5712237544-4512474872-large-400x570-alt-.jpg")
+              end
+            end
+            describe "#medium_posters" do
+              it "includes link to medium poster" do
+                expect(@star_wars.medium_posters.first).to include("url"=>"http://static-api.guidebox.com/022615/thumbnails_movies_medium/55413-7503386526-8892287802-9208222483-medium-240x342-alt-.jpg")
+              end
+            end
+            describe "#small_posters" do
+              it "includes link to small poster" do
+                expect(@star_wars.small_posters.first).to include("url"=>"http://static-api.guidebox.com/022615/thumbnails_movies_small/55413-2337345113-5651742173-3505870658-small-120x171-alt-.jpg")
+              end
+            end
+            describe "#xlarge_banners" do
+              it "includes link to xlarge banner" do
+                expect(@star_wars.xlarge_banners.first).to include("url"=>"http://static-api.guidebox.com/012915/movies/banners/55413-9158895025-3035124387-2547398284-1300x240.jpg")   
+              end
+            end
+            describe "#large_banners" do
+              it "includes link to large banner" do
+                expect(@star_wars.large_banners.first).to include("url"=>"http://static-api.guidebox.com/012915/movies/banners/55413-9158895025-3035124387-2547398284-1000x185.jpg")     
+              end
+            end
+            describe "#medium_banners" do
+              it "includes link to the medium banner" do
+                expect(@star_wars.medium_banners.first).to include("url"=>"http://static-api.guidebox.com/012915/movies/banners/55413-9158895025-3035124387-2547398284-756x140.jpg")
+              end
+            end
+            describe "#small_banners" do
+              it "includes link to small banner" do
+                expect(@star_wars.small_banners.first).to include("url"=>"http://static-api.guidebox.com/012915/movies/banners/55413-9158895025-3035124387-2547398284-551x102.jpg")  
+              end
+            end
+            describe "xlarge_thumbnails" do
+              it "includes link to xlarge thumbnail" do
+                expect(@star_wars.xlarge_thumbnails.first).to include("url"=>"http://static-api.guidebox.com/012915/movies/thumbnails/55413-4649667824-932900156-9715580251-608x342.jpg")  
+              end
+            end
+            describe "large_thumbnails" do
+              it "includes link to large thumbnail" do
+                expect(@star_wars.large_thumbnails.first).to include("url"=>"http://static-api.guidebox.com/012915/movies/thumbnails/55413-4649667824-932900156-9715580251-448x252.jpg")  
+              end
+            end
+            describe "medium_thumbnails" do
+              it "includes link to medium thumbnail" do
+                expect(@star_wars.medium_thumbnails.first).to include("url"=>"http://static-api.guidebox.com/012915/movies/thumbnails/55413-4649667824-932900156-9715580251-304x171.jpg")  
+              end
+            end
+            describe "small_thumbnails" do
+              it "includes link to small thumbnail" do
+                expect(@star_wars.small_thumbnails.first).to include("url"=>"http://static-api.guidebox.com/012915/movies/thumbnails/55413-4649667824-932900156-9715580251-208x117.jpg")  
+              end
+            end
           end
         end
       end
@@ -297,27 +307,6 @@ describe GuideboxWrapper do
             expect(@godzilla.tv_everywhere_android_sources).to include({"source"=>"maxgo", "display_name"=>"MAX GO", "tv_channel"=>"Cinemax", "link"=>"maxgo://deeplink/MO.MO/MGOROSTGP38072", "app_name"=>"MAX GO", "app_link"=>1, "app_required"=>1, "app_download_link"=>"https://play.google.com/store/apps/details?id=com.MAXGo"})
           end
         end
-      end
-    end
-    
-    describe "#posters" do
-      it "includes large poster" do
-        expect(guidebox.posters("star wars a new hope").first).to include("large"=>{"url"=>"http://static-api.guidebox.com/022615/thumbnails_movies/-alt--55413-2929921416-5712237544-4512474872-large-400x570-alt-.jpg", "width"=>400, "height"=>570})
-      end
-    end
-    describe "#thumbnail_images" do
-      it "includes xl thumbnail" do
-        expect(guidebox.thumbnail_images("star wars a new hope").first).to include("xlarge"=>{"url"=>"http://static-api.guidebox.com/012915/movies/thumbnails/55413-4649667824-932900156-9715580251-608x342.jpg", "width"=>608, "height"=>342})
-      end
-    end
-    describe "#banner_images" do
-      it "includes xl banner" do
-        expect(guidebox.banner_images("star wars a new hope").first).to include("xlarge"=>{"url"=>"http://static-api.guidebox.com/012915/movies/banners/55413-9158895025-3035124387-2547398284-1300x240.jpg", "width"=>1300, "height"=>240})
-      end
-    end
-    describe "#background_images" do
-      it "includes original background" do
-        expect(guidebox.background_images("star wars a new hope")).to include({"original"=>{"url"=>"http://static-api.guidebox.com/012915/movies/backgrounds/55413-83836050721-144034282636-0.jpg", "width"=>1920, "height"=>1080}, "original_width"=>1920, "original_height"=>1080, "image_rating"=>0})
       end
     end
   end
