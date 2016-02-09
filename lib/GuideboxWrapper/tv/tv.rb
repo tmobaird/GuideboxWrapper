@@ -16,9 +16,8 @@ module GuideboxWrapper
 
 		def images=(api_key)
 			if @posters == nil
-				wrapper = GuideboxWrapper::GuideboxTv.new(api_key, "all")
-				url = wrapper.base_url
-				url += "/show/" + @id.to_s + "/images/all"
+				wrapper = set_base_url(api_key)
+				url = wrapper.base_url + "/show/" + @id.to_s + "/images/all"
       			images = wrapper.client.query(url)["results"]
       			@posters = images["posters"]
 		    	@backgrounds = images["backgrounds"]
@@ -29,9 +28,8 @@ module GuideboxWrapper
 
 		def seasons=(api_key)
 			if @seasons == nil
-				wrapper = GuideboxWrapper::GuideboxTv.new(api_key, "all")
-				url = wrapper.base_url
-      			url += "/show/" + @id.to_s + "/seasons"
+				wrapper = set_base_url(api_key)
+				url = wrapper.base_url + "/show/" + @id.to_s + "/seasons"
       			results = wrapper.client.query(url)
       			@seasons = results["results"]
       			@season_total = results["total_results"]
@@ -40,18 +38,16 @@ module GuideboxWrapper
 
 		def sources=(api_key)
 			if @sources == nil
-				wrapper = GuideboxWrapper::GuideboxTv.new(api_key, "all")
-				url = wrapper.base_url
-      			url += "/show/" + @id.to_s + "/available_content"
+				wrapper = set_base_url(api_key)
+				url = wrapper.base_url + "/show/" + @id.to_s + "/available_content"
       			@sources = wrapper.client.query(url)["results"]
 			end
 		end
 
 		def related=(api_key)
 			if @related == nil
-				wrapper = GuideboxWrapper::GuideboxTv.new(api_key, "all")
-				url = wrapper.base_url
-      			url += "/show/" + @id.to_s + "/related"
+				wrapper = set_base_url(api_key)
+				url = wrapper.base_url + "/show/" + @id.to_s + "/related"
       			@related = wrapper.client.query(url)["results"]
 			end
 		end
@@ -116,6 +112,11 @@ module GuideboxWrapper
 			ios_sources["episodes"]["all_sources"].each { |source| x << (source.merge({ "type" => "ios" })) if source["type"] == type }
 			android_sources["episodes"]["all_sources"].each { |source| x << (source.merge({ "type" => "android" })) if source["type"] == type }
 			x
+		end
+
+		def set_base_url(api_key)
+			wrapper = GuideboxWrapper::GuideboxTv.new(api_key, "all")
+			wrapper
 		end
 	end
 end
