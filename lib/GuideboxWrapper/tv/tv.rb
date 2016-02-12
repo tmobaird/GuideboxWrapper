@@ -37,18 +37,14 @@ module GuideboxWrapper
 		end
 
 		def sources=(api_key)
-			if @sources == nil
-				wrapper = set_base_url(api_key)
-				url = wrapper.base_url + "/show/" + @id.to_s + "/available_content"
-      			@sources = wrapper.client.query(url)["results"]
+			unless @sources != nil
+				@sources = get_data(api_key, "sources")
 			end
 		end
 
 		def related=(api_key)
-			if @related == nil
-				wrapper = set_base_url(api_key)
-				url = wrapper.base_url + "/show/" + @id.to_s + "/related"
-      			@related = wrapper.client.query(url)["results"]
+			unless @related != nil
+      			@related = get_data(api_key, "related")
 			end
 		end
 
@@ -117,6 +113,17 @@ module GuideboxWrapper
 		def set_base_url(api_key)
 			wrapper = GuideboxWrapper::GuideboxTv.new(api_key, "all")
 			wrapper
+		end
+
+		def get_data(api_key, type)
+			wrapper = set_base_url(api_key)
+			case type
+			when "sources"
+				url = wrapper.base_url + "/show/" + @id.to_s + "/available_content"
+			when "related"
+				url = wrapper.base_url + "/show/" + @id.to_s + "/related"
+			end
+      		wrapper.client.query(url)["results"]
 		end
 	end
 end

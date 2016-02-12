@@ -3,7 +3,7 @@ require 'spec_helper'
 describe GuideboxWrapper do
   describe "GuideboxTv" do
     let!(:guidebox) { GuideboxWrapper::GuideboxTv.new(ENV["MY_API_KEY"], "all") }
-    after { sleep(1.5) }
+    after(:each) { sleep(1.5) }
     describe "#search_for" do
       it "includes entourage" do
         expect(guidebox.search_for("entourage").first["title"]).to eq("Entourage")
