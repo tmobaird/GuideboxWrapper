@@ -32,6 +32,23 @@ describe GuideboxWrapper do
         end
       end
     end
+    describe "#fetch_movie_by_db_id" do
+      before(:all) do
+        @guidebox_wrapper = GuideboxWrapper::GuideboxMovie.new(ENV["MY_API_KEY"], "all")
+      end
+      context "themoviedb" do
+        it "returns movie with attributes for star wars" do
+          star_wars = @guidebox_wrapper.fetch_movie_by_db_id(11, "themoviedb")
+          expect(star_wars).to have_attributes(:id => 55413, :title => "Star Wars: Episode IV: A New Hope", :rating => "PG")
+        end
+      end
+      context "imdb" do
+        it "returns movie with attributes for star wars" do
+          star_wars = @guidebox_wrapper.fetch_movie_by_db_id("tt0076759", "imdb")
+          expect(star_wars).to have_attributes(:id => 55413, :title => "Star Wars: Episode IV: A New Hope", :rating => "PG")
+        end
+      end
+    end
     describe "#show_information" do
       it "returns information for Star Wars: A New Hope" do
         results = guidebox.show_information("star wars a new hope")

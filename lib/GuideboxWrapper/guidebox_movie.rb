@@ -38,6 +38,24 @@ module GuideboxWrapper
       @client.query(url)
     end
 
+    def fetch_movie_by_db_id(id, type)
+      url = @base_url + "/search/movie/id/"
+      case type
+      when "themoviedb"
+        url += "themoviedb/" + id.to_s
+      when "imdb"
+        url += "imdb/" + id.to_s
+      else
+        puts "That id type does not exist"
+        return
+      end
+      id = @client.query(url)["id"]
+      url = @base_url
+      url += "/movie/" + id.to_s
+      results = @client.query(url)
+      Movie.new(results)
+    end
+
     def show_information(name)
       id = self.search_for(name).first["id"]
       url = @base_url
