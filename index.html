@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link href='https://fonts.googleapis.com/css?family=Architects+Daughter' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/github-light.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print">
+
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <title>Guideboxwrapper by tmobaird</title>
+  </head>
+
+  <body>
+    <header>
+      <div class="inner">
+        <h1>Guideboxwrapper</h1>
+        <h2>A Ruby wrapper, for the Guidebox Api, to easily search and extract information from the api.</h2>
+        <a href="https://github.com/tmobaird/GuideboxWrapper" class="button"><small>View project on</small> GitHub</a>
+      </div>
+    </header>
+
+    <div id="content-wrapper">
+      <div class="inner clearfix">
+        <section id="main-content">
+          <h1>
+<a id="guideboxwrapper" class="anchor" href="#guideboxwrapper" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>GuideboxWrapper</h1>
+
+<p><a href="https://codeclimate.com/github/tmobaird/GuideboxWrapper"><img src="https://codeclimate.com/github/tmobaird/GuideboxWrapper/badges/gpa.svg" alt="Code Climate"></a>
+<a href="https://codeclimate.com/github/tmobaird/GuideboxWrapper/coverage"><img src="https://codeclimate.com/github/tmobaird/GuideboxWrapper/badges/coverage.svg" alt="Test Coverage"></a>
+<a href="https://travis-ci.org/tmobaird/GuideboxWrapper"><img src="https://travis-ci.org/tmobaird/GuideboxWrapper.svg?branch=master" alt="Build Status"></a></p>
+
+<p>Guidebox Wrapper is a Ruby Wrapper for the Guidebox API. The Guidebox API contains tons of information about tv shows and movies. This gem will help you extract data from this API in a simple way. It contains an array of different methods that allow you to obtain different information about a movie/tv show. </p>
+
+<h2>
+<a id="installation" class="anchor" href="#installation" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Installation</h2>
+
+<p>Add this line to your application's Gemfile:</p>
+
+<div class="highlight highlight-source-ruby"><pre><span class="pl-k">gem</span> <span class="pl-s"><span class="pl-pds">'</span>GuideboxWrapper<span class="pl-pds">'</span></span></pre></div>
+
+<p>And then execute:</p>
+
+<pre><code>$ bundle
+</code></pre>
+
+<p>Or install it yourself as:</p>
+
+<pre><code>$ gem install GuideboxWrapper
+</code></pre>
+
+<h2>
+<a id="usage" class="anchor" href="#usage" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Usage</h2>
+
+<p>To use this gem you must first register for a personal API key on Guidebox's website. This registration page can be found here: <a href="https://api.guidebox.com/production-key">Guidebox API key registration page</a>. Once you obtain your personal API key (which should be randomized string of numbers and characters) you will be able to start using this gem.</p>
+
+<p><strong>Do not use yet, this Gem is not currently active on RubyGems</strong></p>
+
+<p>The API helpers throughout this gem can be called on either Tv or Movie objects. These objects can be initialized by doing the following:</p>
+
+<div class="highlight highlight-source-ruby"><pre><span class="pl-c1">GuideboxWrapper</span>::<span class="pl-c1">GuideboxTv</span>.<span class="pl-k">new</span>(<span class="pl-s"><span class="pl-pds">"</span>YOUR_API_KEY<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>region<span class="pl-pds">"</span></span>) <span class="pl-c"># region can be "all", "US" (United States), "GB" (Great Britain), etc</span>
+
+<span class="pl-c1">GuideboxWrapper</span>::<span class="pl-c1">GuideboxMovie</span>.<span class="pl-k">new</span>(<span class="pl-s"><span class="pl-pds">"</span>YOUR_API_KEY<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>region<span class="pl-pds">"</span></span>) <span class="pl-c"># region can be "all", "US" (United States), "GB" (Great Britain), etc</span></pre></div>
+
+<p>Keep in mind that Guidebox has some restrictions on the amount of API calls that can be made per month and per second. The API is limited to 100,000 API calls a month and 1 API call per second. The monthy limit of 100,000 resets on the 1st of every month. To check the amont of API calls you have made in the current month use the quota helper. It can be called on either a GuideboxWrapper::Movie Or GuideboxWrapper::Tv object as follows:</p>
+
+<div class="highlight highlight-source-ruby"><pre>tv <span class="pl-k">=</span> <span class="pl-c1">GuideboxWrapper</span>::<span class="pl-c1">GuideboxTv</span>.<span class="pl-k">new</span>(<span class="pl-s"><span class="pl-pds">"</span>YOUR_API_KEY<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>region<span class="pl-pds">"</span></span>)
+tv.quota
+<span class="pl-c"># =&gt; 5500</span>
+
+movie <span class="pl-k">=</span> <span class="pl-c1">GuideboxWrapper</span>::<span class="pl-c1">GuideboxMovie</span>.<span class="pl-k">new</span>(<span class="pl-s"><span class="pl-pds">"</span>YOUR_API_KEY<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>region<span class="pl-pds">"</span></span>)
+movie.quota
+<span class="pl-c"># =&gt; 5500</span></pre></div>
+
+<p>Here are all the helper methods within this wrapper for the Movie and Tv classes:</p>
+
+<h4>
+<a id="movie-helpers" class="anchor" href="#movie-helpers" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Movie Helpers</h4>
+
+<div class="highlight highlight-source-ruby"><pre>guidebox_movie <span class="pl-k">=</span> <span class="pl-c1">GuideboxWrapper</span>::<span class="pl-c1">GuideboxMovie</span>.<span class="pl-k">new</span>(<span class="pl-s"><span class="pl-pds">"</span>YOUR_API_KEY<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>region<span class="pl-pds">"</span></span>)
+
+<span class="pl-c"># Returns an array of results in search by movie title</span>
+guidebox_movie.search_for(<span class="pl-s"><span class="pl-pds">"</span>star wars a new hope<span class="pl-pds">"</span></span>)
+<span class="pl-c"># =&gt; [{"id"=&gt;55413, "title"=&gt;"Star Wars: Episode IV: A New Hope", "release_year"=&gt;1977, "themoviedb"=&gt;11, ...}]</span>
+
+<span class="pl-c"># Returns an array of results in search by movie title and provider</span>
+guidebox_movie.search_for_by_provider(<span class="pl-s"><span class="pl-pds">"</span>star wars a new hope<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>amazon_prime<span class="pl-pds">"</span></span>)
+<span class="pl-c"># =&gt; [{"id"=&gt;55413, "title"=&gt;"Star Wars: Episode IV: A New Hope", "release_year"=&gt;1977, "themoviedb"=&gt;11, ...}]</span>
+
+guidebox_movie.search_by_db_id(<span class="pl-c1">11</span>, <span class="pl-s"><span class="pl-pds">"</span>themoviedb<span class="pl-pds">"</span></span>)
+<span class="pl-c"># =&gt; {"id"=&gt;55413, "title"=&gt;"Star Wars: Episode IV: A New Hope", "release_year"=&gt;1977, "themoviedb"=&gt;11, ...}</span>
+
+guidebox_movie.show_information(<span class="pl-s"><span class="pl-pds">"</span>star wars a new hope<span class="pl-pds">"</span></span>)
+# =&gt; {"id"=&gt;55413, "title"=&gt;"Star Wars: Episode IV: A New Hope", "release_year"=&gt;1977, "themoviedb"=&gt;11, "alternate_titles"=&gt;["Star Wars", "Star Wars Episode IV - A New Hope", "Star Wars Episode 4 - A New Hope", "Star Wars Episode IV", "Star Wars 4", "Star Wars: Episode IV - A New Hope - Despecialized Edition", "Star Wars Episode IV: A New Hope", "Star Wars: Episode IV - A New Hope", "Star Wars: A New Hope", "Star Wars: A New Hope (Bonus Features)"], "imdb"=&gt;"tt0076759", "pre_order"=&gt;false, "release_date"=&gt;"1977-05-25", "rating"=&gt;"PG", "rottentomatoes"=&gt;11292, "freebase"=&gt;"/m/0dtfn", "wikipedia_id"=&gt;52549, "metacritic"=&gt;"http://www.metacritic.com/movie/star-wars-episode-iv---a-new-hope", "common_sense_media"=&gt;nil, "overview"=&gt;"Princess Leia is captured and held hostage by the evil Imperial forces in their effort to take over the galactic Empire. Venturesome Luke Skywalker and dashing captain Han Solo team together with the loveable robot duo R2-D2 and C-3PO to rescue the beautiful princess and restore peace and justice in the Empire.", ...}
+
+guidebox_movie.fetch_movie(<span class="pl-s"><span class="pl-pds">"</span>star wars a new hope<span class="pl-pds">"</span></span>)
+<span class="pl-c"># =&gt; &lt;Movie&gt;</span>
+
+guidebox_movie.fetch_movie_by_db_id(<span class="pl-s"><span class="pl-pds">"</span>tt0076759<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>imdb<span class="pl-pds">"</span></span>)
+<span class="pl-c"># =&gt; &lt;Movie&gt;</span>
+<span class="pl-c"># The first parameter is the external database id (if imdb the id should be a string, if themoviedb it should be an integer)</span></pre></div>
+
+<h4>
+<a id="accessbile-movie-attributes" class="anchor" href="#accessbile-movie-attributes" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Accessbile Movie Attributes</h4>
+
+<div class="highlight highlight-source-ruby"><pre><span class="pl-c1">:id</span>, <span class="pl-c1">:title</span>, <span class="pl-c1">:release_year</span>, <span class="pl-c1">:cast</span>, <span class="pl-c1">:writers</span>, <span class="pl-c1">:directors</span>, <span class="pl-c1">:release_date</span>, <span class="pl-c1">:rating</span>, <span class="pl-c1">:duration</span>, <span class="pl-c1">:themoviedb</span>, <span class="pl-c1">:imdb</span>,
+<span class="pl-c1">:rottentomatoes</span>, <span class="pl-c1">:alternate_titles</span>, <span class="pl-c1">:freebase</span>, <span class="pl-c1">:wikipedia_id</span>, <span class="pl-c1">:metacritic_link</span>, <span class="pl-c1">:overview</span>, <span class="pl-c1">:genres</span>, <span class="pl-c1">:tags</span>, <span class="pl-c1">:facebook_link</span>,
+<span class="pl-c1">:web_trailers</span>, <span class="pl-c1">:ios_trailers</span>, <span class="pl-c1">:android_trailers</span>, <span class="pl-c1">:free_web_sources</span>, <span class="pl-c1">:free_ios_sources</span>, <span class="pl-c1">:free_android_sources</span>, <span class="pl-c1">:tv_everywhere_web_sources</span>,
+<span class="pl-c1">:tv_everywhere_ios_sources</span>, <span class="pl-c1">:tv_everywhere_android_sources</span>, <span class="pl-c1">:subscription_web_sources</span>, <span class="pl-c1">:purchase_web_sources</span>, <span class="pl-c1">:purchase_ios_sources</span>,
+<span class="pl-c1">:purchase_android_sources</span>, <span class="pl-c1">:posters</span>, <span class="pl-c1">:backgrounds</span>, <span class="pl-c1">:banners</span>, <span class="pl-c1">:thumbnails</span></pre></div>
+
+<p>These can be easily accessed as follows:</p>
+
+<div class="highlight highlight-source-ruby"><pre>guidebox_movie <span class="pl-k">=</span> <span class="pl-c1">GuideboxWrapper</span>::<span class="pl-c1">GuideboxMovie</span>.<span class="pl-k">new</span>(<span class="pl-s"><span class="pl-pds">"</span>YOUR_API_KEY<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>region<span class="pl-pds">"</span></span>)
+movie <span class="pl-k">=</span> guidebox_movie.fetch_movie(<span class="pl-s"><span class="pl-pds">"</span>star wars a new hope<span class="pl-pds">"</span></span>)
+
+movie.title 
+<span class="pl-c"># =&gt; "Star Wars: Episode IV: A New Hope"</span>
+
+movie.rating
+<span class="pl-c"># =&gt; "PG"</span>
+
+movie.cast 
+<span class="pl-c"># =&gt; [{"id"=&gt;300791, "name"=&gt;"Mark Hamill", "character_name"=&gt;"Luke Skywalker"}, {"id"=&gt;212668, "name"=&gt;"Harrison Ford", "character_name"=&gt;"Han Solo"}, {"id"=&gt;577359, "name"=&gt;"Carrie Fisher", "character_name"=&gt;"Leia Organa"}, {"id"=&gt;485272, "name"=&gt;"Peter Cushing", "character_name"=&gt;"Grand Moff Tarkin"}, {"id"=&gt;532256, "name"=&gt;"Alec Guinness", "character_name"=&gt;"Obi-Wan Kenobi"}, {"id"=&gt;491391, "name"=&gt;"Anthony Daniels", "character_name"=&gt;"C-3PO"}, {"id"=&gt;153815, "name"=&gt;"Kenny Baker", "character_name"=&gt;"R2-D2"}, {"id"=&gt;274194, "name"=&gt;"Peter Mayhew", "character_name"=&gt;"Chewbacca"}, ...]</span></pre></div>
+
+<p>All Images (posters, backgrounds, banners, thumbnails) must first be set before they can be accessed. Due to the fact that is takes an extra Guidebox query to retrieve all the images, they are not initially set to minimize the amount of required queries. To set the images for a movie object, simply do the following:</p>
+
+<div class="highlight highlight-source-ruby"><pre>movie.images<span class="pl-k">=</span>(<span class="pl-k">&lt;</span><span class="pl-c1">Your</span> <span class="pl-c1">API</span> key<span class="pl-k">&gt;</span>)</pre></div>
+
+<p>This will allow you to retrieve the proper values from the following methods:</p>
+
+<div class="highlight highlight-source-ruby"><pre>movie.large_posters
+<span class="pl-c"># =&gt; [{"url"=&gt;"http://static-api.guidebox.com/thumbnails_movies/35899-7025719867-6648234203-7915630294-large-400x570.jpg", "width"=&gt;400, "height"=&gt;570}, ...]</span>
+movie.medium_posters
+<span class="pl-c"># =&gt; [{"url"=&gt;"http://static-api.guidebox.com/thumbnails_movies_medium/35899-1790661379-2837163895-8028762201-medium-240x342.jpg", "width"=&gt;240, "height"=&gt;342}, ...]</span>
+movie.small_posters
+<span class="pl-c"># =&gt; [{"url"=&gt;"http://static-api.guidebox.com/thumbnails_movies_small/35899-6837106645-4376499262-8650679979-small-120x171.jpg", "width"=&gt;120, "height"=&gt;171}, ...]</span>
+movie.xlarge_banners
+<span class="pl-c"># =&gt; [{"url"=&gt;"http://static-api.guidebox.com/012915/movies/banners/35899-9631411582-5908639450-2857491984-1300x240.jpg", "width"=&gt;1300, "height"=&gt;240}, ...]</span>
+movie.large_banners
+<span class="pl-c"># =&gt; [{"url"=&gt;"http://static-api.guidebox.com/012915/movies/banners/35899-9631411582-5908639450-2857491984-1000x185.jpg", "width"=&gt;1000, "height"=&gt;185}, ...]</span>
+movie.medium_banners
+<span class="pl-c"># =&gt; [{"url"=&gt;"http://static-api.guidebox.com/012915/movies/banners/35899-9631411582-5908639450-2857491984-756x140.jpg", "width"=&gt;756, "height"=&gt;140}, ...]</span>
+movie.small_banners
+<span class="pl-c"># =&gt; [{"url"=&gt;"http://static-api.guidebox.com/012915/movies/banners/35899-9631411582-5908639450-2857491984-551x102.jpg", "width"=&gt;551, "height"=&gt;102}, ...]</span>
+movie.xlarge_thumbnails
+<span class="pl-c"># =&gt; [{"url"=&gt;"http://static-api.guidebox.com/012915/movies/thumbnails/35899-3488454409-126609994-9253611676-608x342.jpg", "width"=&gt;608, "height"=&gt;342}, ...]</span>
+movie.large_thumbnails
+<span class="pl-c"># =&gt; [{"url"=&gt;"http://static-api.guidebox.com/012915/movies/thumbnails/35899-3488454409-126609994-9253611676-448x252.jpg", "width"=&gt;448, "height"=&gt;252}, ...]</span>
+movie.medium_thumbnails
+<span class="pl-c"># =&gt; [{"url"=&gt;"http://static-api.guidebox.com/012915/movies/thumbnails/35899-3488454409-126609994-9253611676-304x171.jpg", "width"=&gt;304, "height"=&gt;171}, ...]</span>
+movie.small_thumbnails
+<span class="pl-c"># =&gt; [{"url"=&gt;"http://static-api.guidebox.com/012915/movies/thumbnails/35899-3488454409-126609994-9253611676-208x117.jpg", "width"=&gt;208, "height"=&gt;117}, ...]</span></pre></div>
+
+<h4>
+<a id="tv-helpers" class="anchor" href="#tv-helpers" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Tv Helpers</h4>
+
+<div class="highlight highlight-source-ruby"><pre>guidebox_tv <span class="pl-k">=</span> <span class="pl-c1">GuideboxWrapper</span>::<span class="pl-c1">GuideboxTv</span>.<span class="pl-k">new</span>(<span class="pl-s"><span class="pl-pds">"</span>YOUR_API_KEY<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>region<span class="pl-pds">"</span></span>)
+
+guidebox_tv.search_for(<span class="pl-s"><span class="pl-pds">"</span>entourage<span class="pl-pds">"</span></span>)
+<span class="pl-c"># =&gt; [{"id"=&gt;6085, "title"=&gt;"Entourage", "alternate_titles"=&gt;[], "container_show"=&gt;0, "first_aired"=&gt;"2004-07-18", "imdb_id"=&gt;"tt0387199", ...}, ...] </span>
+
+guidebox_tv.search_for_by_provider(<span class="pl-s"><span class="pl-pds">"</span>entourage<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>hbo<span class="pl-pds">"</span></span>)
+<span class="pl-c"># =&gt; [{"id"=&gt;6085, "title"=&gt;"Entourage", "alternate_titles"=&gt;[], "container_show"=&gt;0, "first_aired"=&gt;"2004-07-18", "imdb_id"=&gt;"tt0387199", ...}, ...]</span>
+
+guidebox_tv.search_by_db_id(<span class="pl-s"><span class="pl-pds">"</span>tt0387199<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>imdb<span class="pl-pds">"</span></span>)
+<span class="pl-c"># =&gt; {"id"=&gt;6085, "title"=&gt;"Entourage", "alternate_titles"=&gt;[], "container_show"=&gt;0, "first_aired"=&gt;"2004-07-18", "imdb_id"=&gt;"tt0387199", ...} </span>
+
+guidebox_tv.fetch_tv_show_by_db_id(<span class="pl-s"><span class="pl-pds">"</span>tt0387199<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>imdb<span class="pl-pds">"</span></span>)
+<span class="pl-c"># =&gt; &lt;Movie&gt;</span>
+
+guidebox_tv.show_information(<span class="pl-s"><span class="pl-pds">"</span>entourage<span class="pl-pds">"</span></span>)
+<span class="pl-c"># =&gt; {"id"=&gt;6085, "title"=&gt;"Entourage", "alternate_titles"=&gt;[], "status"=&gt;"Ended", "type"=&gt;"television", "container_show"=&gt;0, "first_aired"=&gt;"2004-07-18", "network"=&gt;"HBO", "channels"=&gt;[{"id"=&gt;36, "name"=&gt;"HBO", "short_name"=&gt;"hbo", ...}</span>
+
+guidebox_tv.fetch_tv_show(<span class="pl-s"><span class="pl-pds">"</span>entourage<span class="pl-pds">"</span></span>)
+<span class="pl-c"># =&gt; &lt;Movie&gt;</span></pre></div>
+
+<h4>
+<a id="accessbile-tv-attributes" class="anchor" href="#accessbile-tv-attributes" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Accessbile Tv Attributes</h4>
+
+<div class="highlight highlight-source-ruby"><pre><span class="pl-c1">:id</span>, <span class="pl-c1">:title</span>, <span class="pl-c1">:alternative_titles</span>, <span class="pl-c1">:status</span>, <span class="pl-c1">:first_aired</span>, <span class="pl-c1">:network</span>, 
+<span class="pl-c1">:channels</span>, <span class="pl-c1">:runtime</span>, <span class="pl-c1">:genres</span>, <span class="pl-c1">:tags</span>, <span class="pl-c1">:cast</span>, <span class="pl-c1">:overview</span>, <span class="pl-c1">:air_day_of_week</span>, 
+<span class="pl-c1">:air_time</span>, <span class="pl-c1">:rating</span>, <span class="pl-c1">:imdb_id</span>, <span class="pl-c1">:tvdb</span>, <span class="pl-c1">:themoviedb</span>, <span class="pl-c1">:freebase</span>, <span class="pl-c1">:tv_com</span>, 
+<span class="pl-c1">:metacritic</span>, <span class="pl-c1">:wikipedia_id</span>, <span class="pl-c1">:tvrage</span>, <span class="pl-c1">:fanart</span>, <span class="pl-c1">:poster</span>, <span class="pl-c1">:banner</span>, <span class="pl-c1">:url</span>, 
+<span class="pl-c1">:artwork</span>, <span class="pl-c1">:social</span>, <span class="pl-c1">:seasons</span>, <span class="pl-c1">:season_total</span>, <span class="pl-c1">:related</span>, 
+<span class="pl-c1">:posters</span>, <span class="pl-c1">:banners</span>, <span class="pl-c1">:thumbnails</span>, <span class="pl-c1">:backgrounds</span></pre></div>
+
+<p>These can easily be accessed as follows:</p>
+
+<div class="highlight highlight-source-ruby"><pre>guidebox_tv <span class="pl-k">=</span> <span class="pl-c1">GuideboxWrapper</span>::<span class="pl-c1">GuideboxTv</span>.<span class="pl-k">new</span>(<span class="pl-s"><span class="pl-pds">"</span>YOUR_API_KEY<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>region<span class="pl-pds">"</span></span>)
+show <span class="pl-k">=</span> guidebox_tv.fetch_movie(<span class="pl-s"><span class="pl-pds">"</span>entourage<span class="pl-pds">"</span></span>)
+
+show.title 
+<span class="pl-c"># =&gt; "Entourage"</span>
+
+show.status
+<span class="pl-c"># =&gt; "Ended"</span>
+
+show.rating
+<span class="pl-c"># =&gt; "TV-MA"</span></pre></div>
+
+<p>All Images (posters, backgrounds, banners, thumbnails), Season Information, Accessible Sources, and Related Shows must first be set before they can be accessed. Due to the fact that is takes an extra Guidebox query to retrieve all the images, they are not initially set to minimize the amount of required queries. To set the images for a movie object, simply do the following:</p>
+
+<div class="highlight highlight-source-ruby"><pre>show.images<span class="pl-k">=</span>(<span class="pl-k">&lt;</span><span class="pl-c1">Your</span> <span class="pl-c1">API</span> key<span class="pl-k">&gt;</span>)
+show.seasons<span class="pl-k">=</span>(<span class="pl-k">&lt;</span><span class="pl-c1">Your</span> <span class="pl-c1">API</span> key<span class="pl-k">&gt;</span>)
+show.sources<span class="pl-k">=</span>(<span class="pl-k">&lt;</span><span class="pl-c1">Your</span> <span class="pl-c1">API</span> key<span class="pl-k">&gt;</span>)
+show.related<span class="pl-k">=</span>(<span class="pl-k">&lt;</span><span class="pl-c1">Your</span> <span class="pl-c1">API</span> key<span class="pl-k">&gt;</span>)</pre></div>
+
+<p>This will allow you to retrieve the proper values from the following methods:</p>
+
+<div class="highlight highlight-source-ruby"><pre>show.seasons
+show.season_total
+show.related
+show.posters
+show.banners
+show.thumbnails
+show.backgrounds
+show.web_sources
+show.ios_sources
+show.android_sources
+show.free_sources
+show.subscription_sources
+show.purchase_sources
+show.small_artwork
+show.medium_artwork
+show.large_artwork
+show.xlarge_artwork</pre></div>
+
+<h2>
+<a id="development" class="anchor" href="#development" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Development</h2>
+
+<p>After checking out the repo, run <code>bin/setup</code> to install dependencies. Then, run <code>bin/console</code> for an interactive prompt that will allow you to experiment.</p>
+
+<p>To install this gem onto your local machine, run <code>bundle exec rake install</code>. To release a new version, update the version number in <code>version.rb</code>, and then run <code>bundle exec rake release</code> to create a git tag for the version, push git commits and tags, and push the <code>.gem</code> file to <a href="https://rubygems.org">rubygems.org</a>.</p>
+
+<h2>
+<a id="contributing" class="anchor" href="#contributing" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Contributing</h2>
+
+<ol>
+<li>Fork it ( <a href="https://github.com/%5Bmy-github-username%5D/GuideboxWrapper/fork">https://github.com/[my-github-username]/GuideboxWrapper/fork</a> )</li>
+<li>Create your feature branch (<code>git checkout -b my-new-feature</code>)</li>
+<li>Commit your changes (<code>git commit -am 'Add some feature'</code>)</li>
+<li>Push to the branch (<code>git push origin my-new-feature</code>)</li>
+<li>Create a new Pull Request</li>
+</ol>
+        </section>
+
+        <aside id="sidebar">
+          <a href="https://github.com/tmobaird/GuideboxWrapper/zipball/master" class="button">
+            <small>Download</small>
+            .zip file
+          </a>
+          <a href="https://github.com/tmobaird/GuideboxWrapper/tarball/master" class="button">
+            <small>Download</small>
+            .tar.gz file
+          </a>
+
+          <p class="repo-owner"><a href="https://github.com/tmobaird/GuideboxWrapper"></a> is maintained by <a href="https://github.com/tmobaird">tmobaird</a>.</p>
+
+          <p>This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the Architect theme by <a href="https://twitter.com/jasonlong">Jason Long</a>.</p>
+        </aside>
+      </div>
+    </div>
+
+  
+  </body>
+</html>
