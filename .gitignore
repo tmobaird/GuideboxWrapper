@@ -7,4 +7,4 @@
 /pkg/
 /spec/reports/
 /tmp/
-/GuideboxWrapper-0.1.0.gem
+/*.gem
