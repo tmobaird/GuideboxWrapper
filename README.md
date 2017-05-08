@@ -168,7 +168,7 @@ guidebox_tv.fetch_tv_show("entourage")
 These can easily be accessed as follows:
 ```ruby
 guidebox_tv = GuideboxWrapper::GuideboxTv.new("YOUR_API_KEY", "region")
-show = guidebox_tv.fetch_movie("entourage")
+show = guidebox_tv.fetch_tv_show("entourage")
 
 show.title 
 # => "Entourage"
